@@ -9,7 +9,7 @@ from userinput import (
 )
 
 from api_handling import fetch_stock_data
-from chart_generation import generate_chart
+from chart_generation import (generate_chart, test_chart)
 
 def filter_data_by_date(time_series_data, start_date, end_date):
     """
@@ -73,7 +73,6 @@ def main():
     time_series_data = data.get(time_series_key, {})
 
 
-
     if not time_series_data:
         print("No stock data available for the selected time series.")
         return
@@ -84,11 +83,14 @@ def main():
         print("No stock data available for the selected date range. Try a different date.")
         return
     
+
     labels = sorted(filtered_data.keys())
     values = [float(filtered_data[date]["4. close"]) for date in labels]
     
     
-    generate_chart(labels, values, chart_type)
+    generate_chart(labels, values, chart_type,symbol)
+
+    # test_chart()
 
 
 if __name__ == "__main__":
