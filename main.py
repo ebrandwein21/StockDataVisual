@@ -12,18 +12,11 @@ from api_handling import fetch_stock_data
 from chart_generation import generate_chart
 
 
-
-def filter_data_by_date(data, start_date, end_date):
+def filter_data_by_date(time_series_data, start_date, end_date):
     """
     Filter the stock data based on the provided date range.
     """
-
-    time_series_key = next((key for key in data if "Time series" in key), None)
-    if not time_series_key:
-        print("Invalid data format")
-        return{}
     
-    time_series_data = data[time_series_key]
     filtered ={
         date: values for date, values in time_series_data.items()
         if start_date <= date <= end_date
@@ -50,14 +43,37 @@ def main():
         print("Failed to fetch stock data. Please try again later.")
         return
     
-    filtered_data = filter_data_by_date(data, start_date, end_date)
+    
+#manually input the key
+    
+    if function == "TIME_SERIES_DAILY":
+        time_series_key = "Time Series (Daily)"
+    elif function == "TIME_SERIES_WEEKLY":
+        time_series_key = "Weekly Time Series"
+    elif function == "TIME_SERIES_MONTHLY":
+        time_series_key = "Monthly Time Series"
+    else:
+        print("Invalid function type.")
+        return
+
+    time_series_data = data.get(time_series_key, {})
 
 
-    if not filtered_data:
-        print("No stock data avalible. Try a different date.")
+
+    if not time_series_data:
+        print("No stock data available for the selected time series.")
         return
     
-    generate_chart(filtered_data, chart_type, symbol)
+    filtered_data = filter_data_by_date(time_series_data, start_date, end_date)
+
+    if not filtered_data:
+        print("No stock data available for the selected date range. Try a different date.")
+        return
+    
+    labels = sorted(filtered_data.keys())
+    values = [float(filtered_data[date]["4. close"]) for date in labels]
+    
+    generate_chart(labels, values, chart_type)
 
 
 if __name__ == "__main__":
