@@ -11,7 +11,6 @@ from userinput import (
 from api_handling import fetch_stock_data
 from chart_generation import generate_chart
 
-
 def filter_data_by_date(time_series_data, start_date, end_date):
     """
     Filter the stock data based on the provided date range.
@@ -23,6 +22,7 @@ def filter_data_by_date(time_series_data, start_date, end_date):
     }
 
     return filtered
+
 
 
 
@@ -38,10 +38,15 @@ def main():
     end_date = get_end_date(start_date)
 
     data = fetch_stock_data(symbol, function)
+    print("Data keys from API:", list(data.keys()))
+
 
     if data is None:
         print("Failed to fetch stock data. Please try again later.")
         return
+    
+    print("Successfully fetched stock data.\n")
+
     
     
 #manually input the key
@@ -72,6 +77,7 @@ def main():
     
     labels = sorted(filtered_data.keys())
     values = [float(filtered_data[date]["4. close"]) for date in labels]
+    
     
     generate_chart(labels, values, chart_type)
 
