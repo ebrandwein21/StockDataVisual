@@ -1,6 +1,5 @@
 import pygal
 
-
 ##Generate a graph and open in the user’s default browser.
 ## bar graph
 def generate_chart(filtered_data, chart_type='1', symbol=''):
