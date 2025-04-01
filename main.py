@@ -42,7 +42,7 @@ def main():
     chart_type = get_chart_type()
     function = get_function()
     start_date = get_start_date()
-    end_date = get_end_date()
+    end_date = get_end_date(start_date)
 
     data = fetch_stock_data(symbol, function)
 
@@ -58,7 +58,6 @@ def main():
         return
     
     generate_chart(filtered_data, chart_type, symbol)
-
 
 
 if __name__ == "__main__":
