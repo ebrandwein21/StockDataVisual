@@ -85,6 +85,9 @@ def main():
     
 
     labels = sorted(filtered_data.keys())
+    values = [float(filtered_data[date]["1. open"]) for date in labels]
+    values = [float(filtered_data[date]["4. high"]) for date in labels]
+    values = [float(filtered_data[date]["4. low"]) for date in labels]
     values = [float(filtered_data[date]["4. close"]) for date in labels]
     
     
