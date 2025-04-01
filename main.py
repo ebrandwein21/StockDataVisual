@@ -15,11 +15,20 @@ def filter_data_by_date(time_series_data, start_date, end_date):
     """
     Filter the stock data based on the provided date range.
     """
-    
-    filtered ={
-        date: values for date, values in time_series_data.items()
-        if start_date <= date <= end_date
-    }
+    filtered = {}
+
+    for x in time_series_data:
+        # print(x)
+        if(x > start_date and x < end_date):
+            filtered[x] = time_series_data[x]
+
+    # print(filtered)
+
+    # filtered ={
+    #     date: values for date, values in time_series_data.items()
+    #     if start_date <= date <= end_date
+    # }
+
 
     return filtered
 
