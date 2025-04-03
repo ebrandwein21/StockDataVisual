@@ -12,12 +12,23 @@ def fetch_stock_data(symbol, function):
     """
     api_key = get_api_key()
     base_url = "https://www.alphavantage.co/query"
-    params = {
+
+
+    if(function == "TIME_SERIES_INTRADAY"):
+        params = {
         "function": function,
         "symbol": symbol,
         "apikey": api_key,
-        "datatype": "json"
+        "datatype": "json",
+        "interval": "60min"
     }
+    else:
+        params = {
+            "function": function,
+            "symbol": symbol,
+            "apikey": api_key,
+            "datatype": "json"
+        }
 
     try:
         response = requests.get(base_url, params=params)

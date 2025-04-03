@@ -18,16 +18,9 @@ def filter_data_by_date(time_series_data, start_date, end_date):
     filtered = {}
 
     for x in time_series_data:
-        # print(x)
+        print(x)
         if(x > start_date and x < end_date):
             filtered[x] = time_series_data[x]
-
-    # print(filtered)
-
-    # filtered ={
-    #     date: values for date, values in time_series_data.items()
-    #     if start_date <= date <= end_date
-    # }
 
 
     return filtered
@@ -49,6 +42,7 @@ def main():
     data = fetch_stock_data(symbol, function)
     print("Data keys from API:", list(data.keys()))
 
+    print(data)
 
     if data is None:
         print("Failed to fetch stock data. Please try again later.")
@@ -58,9 +52,11 @@ def main():
 
     
     
-#manually input the key
+    #manually input the key
     
-    if function == "TIME_SERIES_DAILY":
+    if function == "TIME_SERIES_INTRADAY":
+        time_series_key = "Time Series (60min)"
+    elif function == "TIME_SERIES_DAILY":
         time_series_key = "Time Series (Daily)"
     elif function == "TIME_SERIES_WEEKLY":
         time_series_key = "Weekly Time Series"
@@ -71,8 +67,6 @@ def main():
         return
 
     time_series_data = data.get(time_series_key, {})
-
-
 
     if not time_series_data:
         print("No stock data available for the selected time series.")
