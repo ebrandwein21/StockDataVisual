@@ -26,8 +26,6 @@ def filter_data_by_date(time_series_data, start_date, end_date):
     return filtered
 
 
-
-
 def main():
 
     print("Stock Data Visualizer")
@@ -79,10 +77,12 @@ def main():
         return
     
     labels = sorted(filtered_data.keys())
-    values = [float(filtered_data[date]["4. close"]) for date in labels]
-    
-    
-    generate_chart(labels, values, chart_type)
+    open = [float(filtered_data[date]["1. open"]) for date in labels]
+    high = [float(filtered_data[date]["2. high"]) for date in labels]
+    low = [float(filtered_data[date]["3. low"]) for date in labels]
+    close = [float(filtered_data[date]["4. close"]) for date in labels]
+
+    generate_chart(labels, open, high, low, close, chart_type, symbol, start_date,end_date)
 
 
 if __name__ == "__main__":
