@@ -18,10 +18,8 @@ def filter_data_by_date(time_series_data, start_date, end_date):
     filtered = {}
 
     for x in time_series_data:
-        print(x)
         if(x > start_date and x < end_date):
             filtered[x] = time_series_data[x]
-
 
     return filtered
 
@@ -40,15 +38,12 @@ def main():
     data = fetch_stock_data(symbol, function)
     print("Data keys from API:", list(data.keys()))
 
-    print(data)
-
     if data is None:
         print("Failed to fetch stock data. Please try again later.")
         return
     
     print("Successfully fetched stock data.\n")
 
-    
     
     #manually input the key
     

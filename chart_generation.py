@@ -13,7 +13,6 @@ def generate_chart(labels,open,high,low,close, chart_type, symbol, start_date, e
         bar_chart.add("High", high)
         bar_chart.add("Low", low)
         bar_chart.add("Close", close)
-
         bar_chart.render_in_browser()
     
     if chart_type == '2':
